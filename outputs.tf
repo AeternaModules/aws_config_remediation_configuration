@@ -16,7 +16,7 @@ output "config_remediation_configurations_config_rule_name" {
 }
 output "config_remediation_configurations_execution_controls" {
   description = "Map of execution_controls values across all config_remediation_configurations, keyed the same as var.config_remediation_configurations"
-  value       = { for k, v in aws_config_remediation_configuration.config_remediation_configurations : k => v.execution_controls if v.execution_controls != null && length(v.execution_controls) > 0 }
+  value       = { for k, v in aws_config_remediation_configuration.config_remediation_configurations : k => one(v.execution_controls) if v.execution_controls != null && length(v.execution_controls) > 0 }
 }
 output "config_remediation_configurations_maximum_automatic_attempts" {
   description = "Map of maximum_automatic_attempts values across all config_remediation_configurations, keyed the same as var.config_remediation_configurations"
